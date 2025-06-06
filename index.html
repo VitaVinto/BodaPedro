@@ -32,4 +32,20 @@
 </head>
 <body>
   <button id="playBtn">Click Me</button>
-  <video id="video
+  <video id="video" controls>
+    <source src="video.mp4" type="video/mp4" />
+    Tu navegador no soporta el video.
+  </video>
+
+  <script>
+    const button = document.getElementById("playBtn");
+    const video = document.getElementById("video");
+
+    button.addEventListener("click", () => {
+      button.style.display = "none";
+      video.style.display = "block";
+      video.play();
+    });
+  </script>
+</body>
+</html>
