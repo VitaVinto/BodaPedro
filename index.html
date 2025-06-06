@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video con sonido</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
+      background-color: black;
       height: 100%;
-      background: black;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    video {
+
+    #video {
+      display: none;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
     }
+
+    #playBtn {
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <video autoplay playsinline controls>
-    <source src="video.mp4" type="video/mp4">
-    Tu navegador no puede reproducir este video.
-  </video>
-</body>
-</html>
+  <button id="playBtn">Click Me</button>
+  <video id="video
