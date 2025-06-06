@@ -1,169 +1,88 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Video con sonido</title>
+  <title>Minifigura con Video</title>
   <style>
-    html, body {
+    body, html {
       margin: 0;
       padding: 0;
-      background-color: black;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: #f0f0f0;
     }
 
-    #video {
-      display: none;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-
-    #playBtn {
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
+    #button-figure {
+      position: relative;
+      width: 200px;
+      margin: 100px auto;
       cursor: pointer;
     }
 
-    .minifigure {
-      width: 150px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .head {
-      width: 100px;
-      height: 100px;
-      background: #fdd835;
-      border-radius: 50%;
-      position: relative;
-      margin-bottom: 10px;
-    }
-
-    .eye {
-      width: 15px;
-      height: 15px;
-      background: black;
-      border-radius: 50%;
-      position: absolute;
-      top: 30px;
-    }
-
-    .eye.left {
-      left: 25px;
-    }
-
-    .eye.right {
-      right: 25px;
-    }
-
-    .mouth {
-      width: 40px;
-      height: 20px;
-      border-bottom: 5px solid black;
-      border-radius: 0 0 30px 30px;
-      position: absolute;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .upper-body {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
+    #button-figure img {
       width: 100%;
+      display: block;
     }
 
-    .torso {
-      width: 60px;
-      height: 60px;
-      background: #2196f3;
-      border: 2px solid #1976d2;
-      margin: 0 5px;
+    #click-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      pointer-events: none;
     }
 
-    .arm {
-      width: 20px;
-      height: 60px;
-      background: #2196f3;
+    #fullscreen-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      z-index: 9999;
+      background: black;
     }
 
-    .hand {
-      width: 20px;
-      height: 20px;
-      background: #fdd835;
-      border-radius: 50%;
-      margin-top: 60px;
-    }
-
-    .lower-body {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .leg {
-      width: 30px;
-      height: 60px;
-      background: #2196f3;
-      margin: 0 5px;
-    }
-
-    .crotch {
-      width: 20px;
-      height: 20px;
-      background: #2196f3;
-      margin-top: 0;
+    #fullscreen-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
 <body>
-  <button id="playBtn" aria-label="Reproducir video">
-    <div class="minifigure">
-      <div class="head">
-        <div class="eye left"></div>
-        <div class="eye right"></div>
-        <div class="mouth"></div>
-      </div>
-      <div class="upper-body">
-        <div class="arm">
-          <div class="hand"></div>
-        </div>
-        <div class="torso"></div>
-        <div class="arm">
-          <div class="hand"></div>
-        </div>
-      </div>
-      <div class="lower-body">
-        <div class="leg"></div>
-        <div class="crotch"></div>
-        <div class="leg"></div>
-      </div>
-    </div>
-  </button>
 
-  <video id="video" controls>
-    <source src="video.mp4" type="video/mp4" />
-    Tu navegador no soporta el video.
-  </video>
+  <!-- Botón con la minifigura -->
+  <div id="button-figure">
+    <img src="minifigura.png" alt="Minifigura" />
+    <div id="click-text">Click Me</div>
+  </div>
+
+  <!-- Video en pantalla completa -->
+  <div id="fullscreen-video">
+    <video id="video" src="video.mp4" autoplay controls></video>
+  </div>
 
   <script>
-    const button = document.getElementById("playBtn");
+    const figure = document.getElementById("button-figure");
+    const fullscreenVideo = document.getElementById("fullscreen-video");
     const video = document.getElementById("video");
 
-    button.addEventListener("click", () => {
-      button.style.display = "none";
-      video.style.display = "block";
+    figure.addEventListener("click", () => {
+      fullscreenVideo.style.display = "block";
       video.play();
     });
+
+    // Opción: cerrar video al terminar
+    video.addEventListener("ended", () => {
+      fullscreenVideo.style.display = "none";
+    });
   </script>
+
 </body>
 </html>
